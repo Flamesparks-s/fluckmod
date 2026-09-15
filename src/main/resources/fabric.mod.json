@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "fluckmod",
+	"version": "${version}",
+	"name": "Fluck Mod",
+	"description": "Ducks",
+	"authors": [
+		"Flamesparks4143"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/Fluck-Mod-1.21.1"
+	},
+	"license": "MIT",
+	"icon": "assets/fluckmod/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.flamesparks4143.fluckmod.FluckMod"
+		],
+		"fabric-datagen": [
+			"net.flamesparks4143.fluckmod.FluckModDataGenerator"
+		],
+		"client": [
+			"net.flamesparks4143.fluckmod.FluckModClient"
+		]
+	},
+	"mixins": [
+		"fluckmod.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
