@@ -1,4 +1,4 @@
-package net.flamesparks4143.fluckmod.entity.client;
+package net.flamesparks4143.fluckmod.entity.client.duck;
 
 import com.google.common.collect.Maps;
 import net.flamesparks4143.fluckmod.FluckMod;

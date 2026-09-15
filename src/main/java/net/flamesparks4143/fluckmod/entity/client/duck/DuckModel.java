@@ -1,9 +1,10 @@
-package net.flamesparks4143.fluckmod.entity.client;
+package net.flamesparks4143.fluckmod.entity.client.duck;
 
 import net.flamesparks4143.fluckmod.FluckMod;
 import net.flamesparks4143.fluckmod.entity.custom.DuckEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
+
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
@@ -54,9 +55,9 @@ public class DuckModel <T extends DuckEntity> extends SinglePartEntityModel<T> {
         public void setAngles(DuckEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
         this.setHeadAngle(netHeadYaw, headPitch);
-
         this.animateMovement(DuckAnimations.DUCK_WALKING, limbSwing, limbSwingAmount, 2.0f, 2.5f);
         this.updateAnimation(entity.idleAnimationState, DuckAnimations.DUCK_IDLE_1, ageInTicks, 1.0f);
+        updateAnimation(entity.sittingAnimationState, DuckAnimations.DUCK_SITTING, ageInTicks);
         }
         private void setHeadAngle(float headYaw, float headPitch) {
         headYaw = MathHelper.clamp(headYaw, -30.0f, 30.0f);
@@ -67,9 +68,18 @@ public class DuckModel <T extends DuckEntity> extends SinglePartEntityModel<T> {
         }
 
         @Override
+        public void animateModel(T DuckEntity, float limbAngle, float limbDistance, float tickDelta) {
+        if (DuckEntity.isSitting()){
+            animate(DuckAnimations.DUCK_SITTING);
+        }
+        super.animateModel(DuckEntity, limbAngle, limbDistance, tickDelta);
+        }
+
+        @Override
         public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, int color) {
             duck.render(matrices, vertexConsumer, light, overlay, color);
         }
+
 
     @Override
     public ModelPart getPart() {
